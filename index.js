@@ -414,6 +414,13 @@ export default class ModalBox extends React.PureComponent {
     if (width !== this.state.width) newState.width = width;
     this.setState(newState);
 
+    if (
+        Object.keys(newState).length !== 0 &&
+        (this.state.isOpen || this.state.isAnimateOpen)
+    ) {
+      this.animateOpen();
+    }
+
     if (this.onViewLayoutCalculated) this.onViewLayoutCalculated();
   }
 

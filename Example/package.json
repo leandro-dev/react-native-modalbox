@@ -12,7 +12,7 @@
   "dependencies": {
     "react": "16.9.0",
     "react-native": "0.61.1",
-    "react-native-modalbox": "2.0.1",
+    "react-native-modalbox": "github:leandro-dev/react-native-modalbox",
     "react-native-slider": "^0.11.0"
   },
   "devDependencies": {

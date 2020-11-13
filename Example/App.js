@@ -22,7 +22,8 @@ export default class App extends React.Component {
       isOpen: false,
       isDisabled: false,
       swipeToClose: true,
-      sliderValue: 0.3
+      sliderValue: 0.3,
+      expandedHeight: true,
     };
   }
 
@@ -49,6 +50,12 @@ export default class App extends React.Component {
   }
 
   render() {
+    const dynamicStyles = StyleSheet.create({
+      dynamicHeightText: {
+        height: this.state.expandedHeight ? 100 : 'auto',
+      },
+    });
+
     var BContent = (
       <View style={[styles.btn, styles.btnModal]}>
         <Button title="X" color="white" onPress={() => this.setState({isOpen: false})}/>
@@ -65,6 +72,7 @@ export default class App extends React.Component {
         <Button title="Position bottom + ScrollView" onPress={() => this.refs.modal6.open()} style={styles.btn}/>
         <Button title="Modal with keyboard support" onPress={() => this.refs.modal7.open()} style={styles.btn}/>
         <Button title="Entry from top" onPress={() => this.refs.modal8.open()} style={styles.btn}/>
+        <Button title="Bottom with dynamic height" onPress={() => this.refs.modal9.open()} style={styles.btn}/>
 
         <Modal
           style={[styles.modal, styles.modal1]}
@@ -112,6 +120,21 @@ export default class App extends React.Component {
         <Modal ref={"modal8"} style={[styles.modal, styles.modal2]} position={"top"} entry={"top"}>
           <Text style={[styles.text, {color: "white"}]}>Modal entry from top</Text>
         </Modal>
+
+        <Modal
+          style={[styles.modal, styles.modal9]}
+          position={'bottom'}
+          ref={'modal9'}>
+          <View style={{width: screen.width, paddingLeft: 10}}>
+            <Text
+              style={[styles.text, dynamicStyles.dynamicHeightText]}
+              onPress={() =>
+                this.setState({expandedHeight: !this.state.expandedHeight})
+              }>
+              Elem
+            </Text>
+          </View>
+        </Modal>
       </View>
     );
   }
@@ -142,6 +165,10 @@ const styles = StyleSheet.create({
 
   modal4: {
     height: 300
+  },
+
+  modal9: {
+    height: 'auto',
   },
 
   btn: {
